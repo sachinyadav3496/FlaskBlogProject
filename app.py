@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask import abort, session
 import pymysql as sql 
+import datetime
 
 app = Flask(__name__)
 app.secret_key = b"_!@#$%^kafhdkfj@#$%^&lksdjf!@#$%^"
@@ -61,7 +62,11 @@ def login():
 
 @app.route("/blog")
 def blog():
-    return render_template('blog.html')
+    DB.commit()
+    query = "SELECT * FROM blogs ORDER BY date DESC LIMIT 10;"
+    CURSOR.execute(query)
+    result = CURSOR.fetchall()
+    return render_template('blog.html', result=result)
 
 @app.route("/signup")
 def signup():
@@ -117,6 +122,39 @@ def page_not_found(error):
 def page_not_found(error):
     return render_template("error.html", error_msg=error)
 
+@app.route('/post_blog')
+def post_blog():
+    if 'username' in session:
+        flash("Write Code to update Blog")
+        return render_template('post_blog.html')
+    else:
+        flash("!!Please Sign-In to Post Blogs!!")
+        return redirect(url_for('index'))
+
+@app.route('/update_blog', methods=['POST'])
+def update_blog():
+    title = request.form['title']
+    topic = request.form['topic']
+    content = request.form['content']
+    username = session['username']
+    d = datetime.datetime.now()
+    day = f"{d.day}".zfill(2)
+    month = f"{d.month}".zfill(2)
+    date = f"{d.year}-{month}-{day}"
+    query = f'INSERT INTO blogs (username, topic, heading, content, date) values\
+    ("{username}", "{topic}", "{title}", "{content}", "{date}");'
+    try:
+        CURSOR.execute(query)
+        DB.commit()
+    except Exception as e:
+        flash(f"{e}\n{query}")
+        return redirect(url_for('index'))
+    else:
+        flash("!!Blog Updated Sucessfully!!")
+        return redirect(url_for('index'))
+
+
+    return f"{title}, {topic}, {content}, {username}, {date}"
 if __name__ == "__main__":
     
     app.run('0.0.0.0', 80, debug=True)

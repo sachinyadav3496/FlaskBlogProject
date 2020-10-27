@@ -10,41 +10,55 @@
         <h1 class="jumbotron-heading">Explore Blogs</h1>
         <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
         <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          <a href="/post_blog" class="btn btn-primary my-2">Post Blog</a>
+          <a href="#" class="btn btn-secondary my-2">Update / Delete Blog</a>
         </p>
       </div>
     </section>
+
+    {% with messages = get_flashed_messages() %}
+
+{% if messages %}
+  {% for msg in messages %}
+      <p style='color:red'> {{ msg }} </p>
+  {% endfor %}
+{% endif %}
+
+
+{% endwith %}
+
+{% for id, username, topic, heading, content, date in result %}
+
 
     <div class="album py-5 bg-light">
       <div class="container">
 
         <div class="row">
 
-
           <div class="col-md-4">
             <div class="card mb-4 box-shadow">
-              <p class="card-img-top" > Title of Blog </p>
+              <p class="card-img-top" > {{ heading.title() }}</p>
               <div class="card-body">
-                <p class="card-text">Blog Content</p>
+                <p class="card-text">{{ content }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                   </div>
-                  <small class="text-muted">Time</small>
+                  <small class="text-muted"> {{ date }} </small>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <p class="card-text">Author:</p>
+                      <p class="card-text">{{ username }}</p>
                     </div>
-                    <small class="text-muted">Topic</small>
+                    <small class="text-muted">{{ topic }}</small>
                   </div>
               </div>
             </div>
           </div>
          
+        {% endfor %}
           
 
 

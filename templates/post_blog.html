@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+    <link rel="stylesheet" href= {{ url_for('static', filename="css/signin.css") }}  >
+
+{% endblock %}
+
+
+{% block main %}
+
+    
+<form class="form-signin" method="POST" action="/update_blog    ">
+    <img class="mb-4" src={{ url_for('static', filename='images/Grras.jpeg') }} alt="" width="150" height="100">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+  {% for msg in messages %}
+      <p style='color:red'> {{ msg }} </p>
+  {% endfor %}
+{% endif %}
+
+{% endwith %}
+    <label for="title" class="sr-only">Title</label>
+    <input name='title' type="text" id="inputEmail" class="form-control" placeholder="Title" required autofocus>
+    <label for="topic" class="sr-only">Topic</label>
+    <input name='topic' type="text-area" id="inputPassword" class="form-control" placeholder="Topic" required>
+    <label for="content" class="sr-only">Detail Blog</label>
+    <textarea name='content' type="text" id="inputPassword" rows="10" cols="50"
+    class="form-control" placeholder="Blog Content" required>
+    </textarea>
+    
+    <button class="btn btn-lg btn-primary btn-block" type="submit">POST Blog</button>
+  </form>
+
+
+{% endblock %}
