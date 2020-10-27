@@ -1,0 +1,58 @@
+body { 
+    background-color: #eeeeff; 
+    }
+
+h1 { 
+    background-color: white; 
+    color: salmon; 
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+
+table {
+    padding: 100px;
+    float: left;
+    color: darkorange;
+
+   
+}
+
+ td {
+    padding: 20px;
+    border: 1px salmon ridge;
+}
+
+#head1  {
+    color: #464646;
+    font-size: 100px;
+    background-color: #eeeeff; 
+}
+
+.python {
+    color:red;
+    background-color: white;
+    font-size: 60px;
+}
+
+.java {
+    color:white;
+    background-color: salmon;
+    font-size: 50px;
+}
+
+.city {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-family: monospace;
+    background-color: salmon;
+}
+
+.address {
+    text-align: center;
+    color: salmon;
+    font-size: 20px;
+    font-family: monospace;
+    background-color: white;
+}

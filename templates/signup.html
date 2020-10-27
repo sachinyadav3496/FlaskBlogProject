@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+    <link rel="stylesheet" href= {{ url_for('static', filename="css/signin.css") }}  >
+
+{% endblock %}
+
+{% block main %}
+<br>
+<form class="form-signin" method="POST" action="/do_signup">
+    <img class="mb-4" src={{ url_for('static', filename='images/Grras.jpeg') }} alt="" width="150" height="100">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+    {% with messages = get_flashed_messages() %}
+
+{% if messages %}
+  {% for msg in messages %}
+      <p style='color:red'> {{ msg }} </p>
+  {% endfor %}
+{% endif %}
+
+{% endwith %}
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input name='email' type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input name='password' type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <label for="inputPassword" class="sr-only">First Name</label>
+    <input name='first_name' type="text" id="inputPassword" class="form-control" placeholder="First Name" required>
+    <label for="inputPassword" class="sr-only">Last Name</label>
+    <input name='last_name' type="text" id="inputPassword" class="form-control" placeholder="Last Name" required>
+    <label for="inputPassword" class="sr-only">Username</label>
+    <input name='username' type="text" id="inputPassword" class="form-control" placeholder="Username" required>
+    <label for="inputPassword" class="sr-only">Phone Number</label>
+    <input name='ph_no' type="tel"  pattern="[0-9]{10,10}" id="inputPassword" class="form-control" placeholder="Phone" required>
+    <label for="inputPassword" class="sr-only">Sex</label>
+    <select name='sex' id="inputPassword" class="form-control" required>
+        <option value="MALE">MALE</option>
+        <option value="FEMALE">FEMALE</option>
+      </select>
+    <div class=" mb-1">
+      <label>
+        <a href="/">Login ?</a>
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+
+    
+  </form>
+
+{% endblock %}  
