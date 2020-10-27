@@ -117,7 +117,9 @@ def page_not_found(error):
 def page_not_found(error):
     return render_template("error.html", error_msg=error)
 
-app.run('0.0.0.0', 80, debug=True)
+if __name__ == "__main__":
+    
+    app.run('0.0.0.0', 80, debug=True)
 
 
 
