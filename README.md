@@ -11,6 +11,7 @@
     you should have a working database connection on localhost having 
 
         database blog
+        user blog, password blog
         tables users, blogs
         for Schema check Database.ipynb notebook
 
